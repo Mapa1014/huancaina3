@@ -1,0 +1,37 @@
+﻿@using System.Data
+@{
+    ViewData["Title"] = "Inventarios";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@if (ViewBag.DataTable != null)
+{
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn column in ViewBag.DataTable.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in ViewBag.DataTable.Rows)
+            {
+                <tr>
+                    @foreach (var item in row.ItemArray)
+                    {
+                        <td>@item</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron datos.</p>
+}
