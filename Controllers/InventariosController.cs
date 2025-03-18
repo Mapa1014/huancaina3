@@ -38,7 +38,7 @@ namespace huancaina.Controllers
             try
             {
                 // Obtener la cadena de conexión desde la configuración
-                string connectionString = _configuration.GetConnectionString("MySqlConnection");
+                string? connectionString = _configuration.GetConnectionString("MySqlConnection");
                 Console.WriteLine($"Cadena de conexión: {connectionString}");
 
                 // Conexión a la base de datos

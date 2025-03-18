@@ -29,3 +29,205 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+    .styled-table thead {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr:nth-child(even) {
+        background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #ddd;
+        transition: 0.3s;
+    }
+.h1-titulos {
+    align-self: center;
+    align-items: center;
+    justify-items: center;
+}
+
+nav {
+    background-color: #283618;
+    color: white;
+    padding: 1em;
+}
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+        padding: 0;
+    }
+
+        nav ul li {
+            margin: 0 1em;
+        }
+
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                padding: 0.5em 1em;
+                display: block;
+            }
+
+                nav ul li a:hover {
+                    background-color: #555;
+                    border-radius: 4px;
+                }
+
+/* Footer styles */
+footer {
+    background-color: #283618;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Carousel styles */
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: transform 0.5s ease;
+}
+
+/* Estilos para el cuerpo del login */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color: #f8f9fa;
+}
+
+/* Estilos para el contenedor del login */
+.login-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+    /* Estilos para el título del login */
+    .login-container h2 {
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    /* Estilos para las etiquetas del formulario */
+    .login-container label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+    }
+
+    /* Estilos para los campos de entrada del formulario */
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Estilos para el botón de envío */
+    .login-container button {
+        justify-content: center;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #ffd900;
+        color: #000000;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .login-container button:hover {
+            background-color: #b37a00;
+        }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.body-fac {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    color: #4f20cf;
+}
+
+.h2-fac {
+    font-size: 30px; /* Un poco más grande para mayor visibilidad */
+    font-weight: 600;
+    color: #2a44da;
+    text-align: center; /* Centrado para que quede centrado sobre el formulario */
+    margin-bottom: 20px; /* Espacio entre el título y el formulario */
+}
+
+.border {
+    color: #07060a;
+}
+
+.col-md-5 {
+    margin: 20px;
+}
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.styled-table thead {
+    background-color: #FFA726; /* Naranja claro */
+    color: white;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f9e5c7; /* Un tono muy suave de naranja */
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f4c08d; /* Un tono intermedio de naranja */
+    transition: 0.3s;
+}

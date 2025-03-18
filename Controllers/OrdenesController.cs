@@ -24,6 +24,11 @@ namespace huancaina.Controllers
             return View();
         }
 
+        public IActionResult CrearOrdenes()
+        {
+            return View("CrearOrdenes");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -38,7 +43,7 @@ namespace huancaina.Controllers
             try
             {
                 // Obtener la cadena de conexión desde la configuración
-                string connectionString = _configuration.GetConnectionString("MySqlConnection");
+                string? connectionString = _configuration.GetConnectionString("MySqlConnection");
                 Console.WriteLine($"Cadena de conexión: {connectionString}");
 
                 // Conexión a la base de datos

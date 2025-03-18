@@ -1,0 +1,150 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <main>
+        <div class="container mt-5">
+            <div class="text-center mb-4">
+                <h2 class="h2-fac">Registro de Cliente Sistema de Facturación</h2>
+                <hr>
+            </div>
+
+            <!-- Contenedor de formulario -->
+            <form asp-controller="Ordenes" asp-action="CrearOrdenes"class="row g-3 needs-validation" novalidate style="justify-content: center;">
+
+                <div class="col-md-5">
+                    <label for="alidationCustom01" class="form-label">Tipo de Identificación*</label>
+                    <select id="tipo_id" name="tipo_id" class="form-select" required>
+                        <option value="">Seleccione</option>
+                        <option value="NIT">NIT</option>
+                        <option value="Cedula">Cedula CiudadaníA - CC</option>
+                        <option value="Cedula Extrangeria">Cedula Extrangeria - CE</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe seleccionar un tipo de identificación.
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="numero_id" class="form-label">Número de Identificación*</label>
+                    <input type="number" id="numero_id" name="numero_id" class="form-control"
+                           placeholder="Ingrese su número de identificación" required>
+                    <div class="invalid-feedback">
+                        Debe ingresar un número de identificación válido.
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="nombres" class="form-label">Nombres*</label>
+                    <input type="text" id="nombres" name="nombres" class="form-control" placeholder="Ingrese sus nombres"
+                           required>
+                    <div class="invalid-feedback">
+                        Debe ingresar sus nombres.
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="apellidos" class="form-label">Apellidos*</label>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control"
+                           placeholder="Ingrese sus apellidos" required>
+                    <div class="invalid-feedback">
+                        Debe ingresar sus apellidos.
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="correo" class="form-label">Correo Electrónico*</label>
+                    <input type="email" id="correo" name="correo" class="form-control" placeholder="ejemplo@dominio.com"
+                           required>
+                    <div class="invalid-feedback">
+                        Debe ingresar un correo electrónico válido.
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label for="confirma_correo" class="form-label">Confirme Correo Electrónico*</label>
+                    <input type="email" id="confirma_correo" name="confirma_correo" class="form-control"
+                           placeholder="ejemplo@dominio.com" required>
+                    <div class="invalid-feedback">
+                        Debe confirmar su correo electrónico.
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    <label for="tipo_persona" class="form-label">Tipo de Persona*</label>
+                    <select id="tipo_persona" name="tipo_persona" class="form-select" required>
+                        <option value="">Seleccione</option>
+                        <option value="Natural">Persona Natural</option>
+                        <option value="Juridica">Persona Jurídica</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe seleccionar un tipo de persona.
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    <label for="tipo_persona" class="form-label">Tipo de regimen</label>
+                    <select id="tipo_persona" name="tipo_persona" class="form-select" required>
+                        <option value="">Seleccione</option>
+                        <option value="simple">Regimen simple</option>
+                        <option value="comun">Regimen Comun</option>
+                        <option value="especial">Regimen especial</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe seleccionar un tipo de persona.
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    <label for="direccion" class="form-label">Dirección*</label>
+                    <input type="text" id="direccion" name="direccion" class="form-control"
+                           placeholder="Ingrese su dirección" required>
+                    <div class="invalid-feedback">
+                        Debe ingresar su dirección.
+                    </div>
+                </div>
+
+
+                <div class="col-md-5 mb-3">
+                    <label for="ciudad" class="form-label">Ciudad*</label>
+                    <input type="text" id="ciudad" name="ciudad" class="form-control" placeholder="Ingrese su ciudad"
+                           required>
+                    <div class="invalid-feedback">
+                        Debe ingresar su ciudad.
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <fieldset class="border p-3 mb-4">
+                        <h5 class="text-center">Tratamiento de Datos</h5>
+                        <p>
+                            ParkEase está comprometido con la protección de la privacidad de nuestros clientes y usuarios.
+                            Al registrarse, autoriza el uso de sus datos para fines comerciales.
+                        </p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="autorizacion" required>
+                            <label class="form-check-label" for="autorizacion">
+                                Autorizo el tratamiento de mis datos
+                                personales
+                            </label>
+                            <div class="invalid-feedback">
+                                Debe aceptar para continuar.
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+
+            <hr>
+
+            <div class="text-center">
+                <h5>HUANCAINA</h5>
+            </div>
+
+        </div>
+    </main>
+}

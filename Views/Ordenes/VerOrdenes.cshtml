@@ -9,7 +9,7 @@
 
 @if (ViewBag.DataTable != null)
 {
-    <table>
+    <table class="styled-table">
         <thead>
             <tr>
                 @foreach (DataColumn column in ViewBag.DataTable.Columns)
@@ -35,3 +35,4 @@ else
 {
     <p>No se encontraron datos.</p>
 }
+
