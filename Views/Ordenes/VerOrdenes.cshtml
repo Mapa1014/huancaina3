@@ -1,4 +1,18 @@
 ﻿@using System.Data
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" asp-area="" asp-controller="Ordenes" asp-action="CrearOrdenes">Crear nueva orden</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 @{
     ViewData["Title"] = "Ordenes";
 }
@@ -6,9 +20,8 @@
 <h2>@ViewData["Title"]</h2>
 
 <p>@ViewBag.Mensaje</p>
-
 @if (ViewBag.DataTable != null)
-{
+{   
     <table class="styled-table">
         <thead>
             <tr>

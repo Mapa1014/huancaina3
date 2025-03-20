@@ -12,11 +12,13 @@ namespace huancaina.Controllers
     {
         private readonly ILogger<OrdenesController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly DatabaseHelper _dbHelper;
 
         public OrdenesController(ILogger<OrdenesController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
+            _dbHelper = new DatabaseHelper(configuration);
         }
 
         public IActionResult VerOrdenes()
@@ -38,47 +40,54 @@ namespace huancaina.Controllers
 
         public IActionResult LeerOrdenes()
         {
-            DataTable dataTable = new DataTable();
-
             try
             {
-                // Obtener la cadena de conexión desde la configuración
-                string? connectionString = _configuration.GetConnectionString("MySqlConnection");
-                Console.WriteLine($"Cadena de conexión: {connectionString}");
+                string query = "SELECT * FROM ordenes"; 
+                DataTable resultados = _dbHelper.VerDatos(query);
 
-                // Conexión a la base de datos
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    Console.WriteLine("Conexión a la base de datos exitosa."); // Mensaje en consola
-                    string query = "SELECT * FROM ordenes"; // Ajusta la consulta según tus necesidades
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                        {
-                            adapter.Fill(dataTable);
-                        }
-                    }
-                }
-
-                ViewBag.Mensaje = "Consulta ejecutada exitosamente.";
-                ViewBag.DataTable = dataTable;
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine($"Error de MySQL: {ex.Message}");
-                ViewBag.Mensaje = $"Error de MySQL: {ex.Message}";
-                ViewBag.DataTable = null;
+                ViewBag.DataTable = resultados;
+                ViewBag.Mensaje = "Consulta ejecutada correctamente.";
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error general: {ex.Message}");
-                ViewBag.Mensaje = $"Error general: {ex.Message}";
-                ViewBag.DataTable = null;
+                ViewBag.Mensaje = $"Error: {ex.Message}";
             }
 
             return View("VerOrdenes");
         }
+
+        [HttpPost]
+        public IActionResult CrearOrdenes(int id_orden, int n_mesa, DateTime fecha_orden, string estado, string observaciones, int id_usuario)
+        {
+            try
+            {                
+                string query = "INSERT INTO ordenes (id_orden, n_mesa, fecha_orden, estado, observaciones, usuarios_id_usuario) " +
+                               "VALUES (@IdOrden, @NMesa, @FechaOrden, @Estado, @Observaciones, @IdUsuario)";
+                                
+                var parametros = new[]
+                {
+                new MySqlParameter("@IdOrden", id_orden),
+                new MySqlParameter("@NMesa", n_mesa),
+                new MySqlParameter("@FechaOrden", fecha_orden),
+                new MySqlParameter("@Estado", estado),
+                new MySqlParameter("@Observaciones", observaciones),
+                new MySqlParameter("@IdUsuario", id_usuario)
+            };
+                                
+                _dbHelper.InsertarDatos(query, parametros);
+                                
+                TempData["Mensaje"] = "Orden creada exitosamente.";
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                TempData["Mensaje"] = $"Error al crear la orden: {ex.Message}";
+            }
+
+            
+            return RedirectToAction("LeerOrdenes");
+        }
     }
 }
+
 

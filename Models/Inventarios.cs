@@ -2,6 +2,7 @@
 {
     public class Inventarios
     {
+
         public required int IdInventario { get; set; }
         public required string Categoria { get; set; }
         public required decimal CantidadDisponible { get; set; }

@@ -4,9 +4,17 @@
 @{
     <main class="login-body">
         <div class="login-container">
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-success">@ViewBag.Mensaje</div>
+            }
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
             <h2>Login</h2>
             <form method="post" asp-controller="Home" asp-action="Login">
-                <label for="username">IdUsuario:</label>
+                <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" required>
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
