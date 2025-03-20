@@ -1,39 +1,85 @@
 html {
-  font-size: 14px;
+    font-size: 14px; /* Tamaño base */
 }
 
+/* Tamaño para tablets */
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 15px;
+    }
 }
+
+/* Ajuste para portátiles (1366px a 1920px) */
+@media (min-width: 1024px) and (max-width: 1920px) {
+    html {
+        font-size: 14px; /* Mantenerlo más pequeño para evitar que se vea grande */
+    }
+}
+
+/* Ajuste para pantallas extra grandes */
+@media (min-width: 1920px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Para pantallas muy pequeñas (móviles) */
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+
+/* Ajuste adicional para pantallas extra grandes */
+@media (min-width: 1440px) {
+    html {
+        font-size: 17px;
+    }
+}
+
+/* Para pantallas muy pequeñas (móviles) */
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-size: 1rem;
+}
+
+.container {
+    max-width: 90%;
+    margin: auto;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+    color: var(--bs-secondary-color);
+    text-align: end;
+    font-size: 14px; /* Reduce el tamaño del texto */
+    height: 36px; /* Ajusta la altura del input */
+    padding: 5px 10px; /* Reduce el padding interno */
 }
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    text-align: start;
+    font-size: 14px; /* Reduce el tamaño del texto */
+    height: 36px; /* Ajusta la altura del input */
+    padding: 5px 10px; /* Reduce el padding interno */
 }
 .styled-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
     border: 1px solid #ddd;
 }
@@ -60,6 +106,8 @@ body {
     align-self: center;
     align-items: center;
     justify-items: center;
+    font-size: 1.8rem;
+
 }
 
 nav {
@@ -85,36 +133,29 @@ nav {
                 text-decoration: none;
                 padding: 0.5em 1em;
                 display: block;
+                font-size: 1.2em;
             }
 
                 nav ul li a:hover {
                     background-color: #555;
                     border-radius: 4px;
+                   
                 }
 
-/* Footer styles */
 footer {
     background-color: #283618;
     color: white;
     text-align: center;
     padding: 1em;
-    position: fixed;
     width: 100%;
-    bottom: 0;
+    margin-top: 20px; /* Agrega espacio antes del footer */
 }
 
-/* Carousel styles */
-.carousel {
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    height: 300px;
+.carousel-inner img {
+    height: 500px;
+    object-fit: cover;
 }
 
-.carousel-item {
-    min-width: 100%;
-    transition: transform 0.5s ease;
-}
 
 /* Estilos para el cuerpo del login */
 .login-body {
@@ -131,7 +172,7 @@ footer {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 280px; /* Hacerlo más compacto */
     text-align: center;
 }
 

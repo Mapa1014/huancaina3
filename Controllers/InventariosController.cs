@@ -31,6 +31,11 @@ namespace huancaina.Controllers
             return View("CrearInventario");
         }
 
+        public IActionResult VerInventarios()
+        {
+            return View("LeerInventario");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

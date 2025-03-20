@@ -1,57 +1,97 @@
-﻿
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - huancaina</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css")"/>
-    <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
+    <title>@ViewData["Title"] - HUANCAINA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">huancaina</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="/" data-controller="Home" data-action="Index">
+                    <img src="~/img/logo.jpg" alt="Huancaina" style="height: 80px; width: auto;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">s
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Ordenes" asp-action="LeerOrdenes">Ordenes</a>
+                            <a class="nav-link text-dark" href="/Ordenes/LeerOrdenes"
+                               data-controller="Ordenes" data-action="LeerOrdenes">Órdenes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventarios" asp-action="LeerInventario">Inventarios</a>
+                            <a class="nav-link text-dark" href="/Inventarios/LeerInventario"
+                               data-controller="Inventarios" data-action="LeerInventario">Inventarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Menu" asp-action="VerMenu">Menu</a>
+                            <a class="nav-link text-dark" href="/Menu/VerMenu"
+                               data-controller="Menu" data-action="VerMenu">Menú</a>
                         </li>
                     </ul>
-                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="getLogin">Iniciar Sesión</a>
-                    
+                    <a class="btn btn-warning" href="/Home/getLogin"
+                       data-controller="Home" data-action="getLogin">Iniciar Sesión</a>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main id="main-content" role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - huancaina - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <footer class="border-top bg-dark text-light py-4">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Huancaína Cocina Peruana</h5>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="https://goo.gl/maps/XpBfW" target="_blank" class="text-light">
+                            Calle 39b # 21-12, Bogotá, Colombia
+                        </a>
+                    </p>
+                    <p><i class="fas fa-phone"></i> +57 310 6892785</p>
+                    <p><i class="fas fa-envelope"></i> huancaina85@gmail.com</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Horario de Atención</h5>
+                    <p><i class="fas fa-clock"></i> Lunes - Viernes: 12:00 PM - 09:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Sábado: 12:00 PM - 11:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Domingo: 12:00 PM - 05:00 PM</p>
+                </div>
+
+                <div class="col-md-4 text-center">
+                    <h5 class="fw-bold">Síguenos</h5>
+                    <a href="https://www.facebook.com/Huancainacocinaperuana" class="text-light me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://www.instagram.com/huancaina_cocinaperuana/" class="text-light me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://wa.me/573106892785" class="text-light"><i class="fab fa-whatsapp fa-2x"></i></a>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                &copy; 2025 - Huancaína | <a href="/" class="text-warning text-decoration-none">Home</a>
+            </div>
         </div>
     </footer>
-    <script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
-    <script src="@Url.Content("~/lib/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
+
+    <!-- Bootstrap JS al final para mejorar rendimiento -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script personalizado -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

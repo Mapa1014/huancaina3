@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// configure the app to use the database context
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

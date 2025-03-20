@@ -31,6 +31,11 @@ namespace huancaina.Controllers
             return View("CrearOrdenes");
         }
 
+        public IActionResult VerOrden()
+        {
+            return View("LeerOrdenes");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

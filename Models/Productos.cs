@@ -1,7 +1,12 @@
-﻿namespace huancaina.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace huancaina.Models
 {
     public class Productos
+
     {
+        [Key]
         public required int IdProducto { get; set; }
         public required string NombreProducto { get; set; }
         public required string UnidadMedida { get; set; }
