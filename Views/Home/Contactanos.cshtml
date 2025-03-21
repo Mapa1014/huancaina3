@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Contáctanos";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<link rel="stylesheet" href="~/css/Contactanos.css" asp-append-version="true">
+
+<main class="contactanos-container">
+    <h2 class="contactanos-title">Contáctanos</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.MensajeExito))
+    {
+        <div class="alert alert-success">
+            @ViewBag.MensajeExito
+        </div>
+    }
+
+    <p class="contactanos-description">
+        ¿Tienes alguna pregunta o comentario? ¡No dudes en contactarnos!
+    </p>
+
+    <form class="contactanos-form" method="post" action="@Url.Action("EnviarMensaje", "Home")">
+
+        <div class="form-group">
+            <label for="nombre">Nombres:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Número de teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" class="form-control" pattern="[0-9+ ]{7,10}" required>
+        </div>
+
+
+        <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+
+    </form>
+
+</main>

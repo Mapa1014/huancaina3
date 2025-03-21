@@ -30,7 +30,6 @@ html {
     }
 }
 
-
 /* Ajuste adicional para pantallas extra grandes */
 @media (min-width: 1440px) {
     html {
@@ -45,7 +44,6 @@ html {
     }
 }
 
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -59,6 +57,7 @@ body {
 .container {
     max-width: 90%;
     margin: auto;
+
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -110,46 +109,62 @@ body {
 
 }
 
-nav {
-    background-color: #283618;
-    color: white;
-    padding: 1em;
+.navbar {
+    background-color: #283618 !important; /* Fondo negro */
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center;
+    padding: 1rem;
 }
 
-    nav ul {
+    .navbar ul {
         list-style: none;
         display: flex;
-        justify-content: space-around;
+        justify-content: center; /* Asegura que los elementos estén centrados */
+        align-items: center;
         margin: 0;
         padding: 0;
     }
 
-        nav ul li {
-            margin: 0 1em;
+        .navbar ul li {
+            margin: 0 1.5rem; /* Espaciado entre los elementos del navbar */
         }
 
-            nav ul li a {
-                color: white;
-                text-decoration: none;
-                padding: 0.5em 1em;
-                display: block;
-                font-size: 1.2em;
-            }
+    .navbar a,
+    .navbar .nav-link {
+        color: white !important; /* Letras blancas */
+        font-size: 1.4em; /* Aumenta el tamaño de la fuente */
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-                nav ul li a:hover {
-                    background-color: #555;
-                    border-radius: 4px;
-                   
-                }
-
-footer {
-    background-color: #283618;
+        .navbar a:hover,
+        .navbar .nav-link:hover {
+            color: #f8c200 !important; /* Cambia a amarillo al pasar el mouse (opcional) */
+        }
+.footer {
+    background-color: #283618 !important;
     color: white;
     text-align: center;
     padding: 1em;
     width: 100%;
     margin-top: 20px; /* Agrega espacio antes del footer */
+    font-size: 0.9em; /* Reduce el tamaño del texto en el footer */
 }
+.btn-footer
+{
+    font-size: 0.8rem; /* Ajusta el tamaño de la letra */
+    padding: 9px 16px; /* Ajusta el tamaño del botón */
+    background-color: #007bff; /* Color azul Bootstrap */
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+    .btn-footer:hover {
+        background-color: #0056b3; /* Oscurece el color al pasar el mouse */
+    }
+
 
 .carousel-inner img {
     height: 500px;

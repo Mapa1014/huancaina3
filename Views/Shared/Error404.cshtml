@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error 404 - Página no encontrada</title>
+        <!-- Vincular la hoja de estilos específica para la página de error -->
+        <link rel="stylesheet" href="~/css/Error404.css">
+    </head>
+    <body>
+        <main>
+            <div class="error-container">
+                <div class="error-404">
+                    <img src="~/img/logo.jpg" alt="Logo de la empresa" width="350">
+                    <div class="error-codigo">¡Oh no!</div>
+                    <div class="error-mensaje">Error 404</div>
+                    <img class="error-img" src="~/Content/images/54-512.webp" alt="Cara triste">
+                    <p class="p-descrip">Lo sentimos, no hemos podido encontrar la página que buscas. Inténtalo nuevamente.</p>
+                    <a href="@Url.Action("Index", "Home")" class="home-btn">Regresar al inicio</a>
+                </div>
+            </div>
+        </main>
+    </body>
+    </html>
+}

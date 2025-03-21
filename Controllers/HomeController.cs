@@ -40,6 +40,7 @@ namespace huancaina.Controllers
 
             var u = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == username && u.Contraseña == password);
 
+
             if (u != null)
             {
                 TempData["Mensaje"] = $"Ingresó exitosamente. {username}";
@@ -57,6 +58,19 @@ namespace huancaina.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult Contactanos()
+        {
+            return View();
+        }
+
+        // Acción para procesar el envío del formulario
+        [HttpPost]
+        public IActionResult EnviarMensaje(string nombre, string telefono, string email, string mensaje)
+        {
+            // Enviar un mensaje de confirmación a la vista
+            ViewBag.MensajeExito = "Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.";
+
+            return View("Contactanos"); // Vuelve a la misma vista de Contactanos con el mensaje
+        }
     }
 }
-

@@ -10,7 +10,6 @@ namespace huancaina.Data
             : base(options)
         {
         }
-
         public DbSet<Usuarios> Usuarios { get; set; } //Definir las tablas que tendra la DB
         public DbSet<Ordenes> Ordenes { get; set; }
         public DbSet<Inventarios> Inventarios { get; set; }
