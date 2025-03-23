@@ -29,7 +29,8 @@
                 {
                     <th>@column.ColumnName</th>
                 }
-            </tr>
+                <th>Acciones</th>
+            </tr>            
         </thead>
         <tbody>
             @foreach (DataRow row in ViewBag.DataTable.Rows)
@@ -39,6 +40,14 @@
                     {
                         <td>@item</td>
                     }
+                    <td>
+                        <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                        <a href="@Url.Action("CrearInventario", "Inventarios", new { id_inventario = row["id_inventario"] })"
+                           class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
+
+                        <a href="@Url.Action("EliminarInventario", new { id_inventario = row["id_inventario"] })" class="btn btn-danger"
+                           onclick="return confirm('¿Está seguro de que desea eliminar este inventario?');"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
         </tbody>

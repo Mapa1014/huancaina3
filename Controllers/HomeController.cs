@@ -38,12 +38,13 @@ namespace huancaina.Controllers
             Console.WriteLine($"Usuarios: {username}, Contraseña: {password}");
             // Simulación de autenticación
 
-            var u = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == username && u.Contraseña == password);
+            var u = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == username && u.Contrasena == password);
 
 
             if (u != null)
             {
                 TempData["Mensaje"] = $"Ingresó exitosamente. {username}";
+                Console.WriteLine($"Ingresó exitosamente. {username}");
                 return RedirectToAction("Index", "Home"); // Redirige si el login es exitoso
             }
 
@@ -69,7 +70,7 @@ namespace huancaina.Controllers
         {
             // Enviar un mensaje de confirmación a la vista
             ViewBag.MensajeExito = "Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.";
-
+            Console.WriteLine($"Nombre: {nombre}, Teléfono: {telefono}, Email: {email}, Mensaje: {mensaje}");
             return View("Contactanos"); // Vuelve a la misma vista de Contactanos con el mensaje
         }
     }

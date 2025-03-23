@@ -140,7 +140,7 @@ body {
 
         .navbar a:hover,
         .navbar .nav-link:hover {
-            color: #f8c200 !important; /* Cambia a amarillo al pasar el mouse (opcional) */
+            color: #f8c200 !important; 
         }
 .footer {
     background-color: #283618 !important;
@@ -148,8 +148,8 @@ body {
     text-align: center;
     padding: 1em;
     width: 100%;
-    margin-top: 20px; /* Agrega espacio antes del footer */
-    font-size: 0.9em; /* Reduce el tamaño del texto en el footer */
+    margin-top: 20px; 
+    font-size: 0.9em; 
 }
 .btn-footer
 {
@@ -264,7 +264,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 18px;
+    font-size: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }

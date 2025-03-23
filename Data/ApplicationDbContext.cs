@@ -15,23 +15,19 @@ namespace huancaina.Data
         public DbSet<Inventarios> Inventarios { get; set; }
         public DbSet<Productos> Productos { get; set; }
 
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder) //Confirguro nombres de las tablas
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuarios>()
-                .HasKey(u => u.IdUsuario);
+                .HasKey(u => u.IdUsuario); // This is fine for the key configuration.
 
-            modelBuilder.Entity<Ordenes>()
-                .HasKey(o => o.IdOrden);
-
-            modelBuilder.Entity<Inventarios>()
-                .HasKey(i => i.IdInventario);
-
-            modelBuilder.Entity<Productos>()
-                .HasKey(p => p.IdProducto);   
+            modelBuilder.Entity<Usuarios>()
+                .Property(u => u.IdUsuario)
+                .HasColumnName("id_usuario"); // Map to the database column name.
 
             base.OnModelCreating(modelBuilder);
         }
+
 
     }
 }

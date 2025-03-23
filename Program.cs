@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<DatabaseHelper>();
 // Configure the database context to use MySQL
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -29,6 +29,15 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
+    pattern: "{controller=Ordenes}/{action=EliminarOrden}/{id_orden?}");
+
+app.MapControllerRoute(
+    name: "home",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "ordenes",
+    pattern: "{controller=Ordenes}/{action=FormularioOrdenes}/{id_orden?}");
+
 
 app.Run();

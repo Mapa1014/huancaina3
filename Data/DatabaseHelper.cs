@@ -12,8 +12,8 @@ namespace huancaina.Data
         {
             _configuration = configuration;
         }
-
-        public DataTable VerDatos(string query)
+        
+        public DataTable VerDatos(string query, MySqlParameter[] parametros = null)
         {
             DataTable dataTable = new DataTable();
 
@@ -26,6 +26,12 @@ namespace huancaina.Data
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
+                        // Agregar parámetros si existen
+                        if (parametros != null)
+                        {
+                            command.Parameters.AddRange(parametros);
+                        }
+
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {
                             adapter.Fill(dataTable);
@@ -46,6 +52,7 @@ namespace huancaina.Data
 
             return dataTable;
         }
+
         public void InsertarDatos(string query, MySqlParameter[] parametros)
         {
             try
@@ -73,5 +80,61 @@ namespace huancaina.Data
                 throw;
             }
         }
+
+        public void ActualizarDatos(string query, MySqlParameter[] parametros)
+        {
+            try
+            {
+                string? connectionString = _configuration.GetConnectionString("MySqlConnection");
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddRange(parametros);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Error de MySQL: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general: {ex.Message}");
+                throw;
+            }
+        }
+        public void EliminarDatos(string query, MySqlParameter[] parametros)
+        {
+            try
+            {
+                string? connectionString = _configuration.GetConnectionString("MySqlConnection");
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddRange(parametros);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Error de MySQL: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general: {ex.Message}");
+                throw;
+            }
+        }
+
     }
 }
