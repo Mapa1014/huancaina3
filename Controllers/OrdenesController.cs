@@ -4,6 +4,8 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using huancaina.Models;
 
 namespace huancaina.Controllers
 {
@@ -11,11 +13,13 @@ namespace huancaina.Controllers
     {
         private readonly ILogger<OrdenesController> _logger;
         private readonly DatabaseHelper _dbHelper;
+        private readonly ApplicationDbContext _context;
 
-        public OrdenesController(ILogger<OrdenesController> logger, DatabaseHelper dbHelper)
+        public OrdenesController(ILogger<OrdenesController> logger, DatabaseHelper dbHelper, ApplicationDbContext context)
         {
             _dbHelper = dbHelper;
             _logger = logger;
+            _context = context;            
         }
         public IActionResult LeerOrdenes()
         {
@@ -33,7 +37,7 @@ namespace huancaina.Controllers
             }
             return View("VerOrdenes");
         }
-        public IActionResult FormularioOrdenes(string accion, int? id_orden = null)
+        public async Task<IActionResult> FormularioOrdenes(string accion, int? id_orden = null)
         {
             ViewBag.Accion = accion; // "Crear" o "Actualizar"
             ViewBag.Orden = null;
@@ -45,7 +49,9 @@ namespace huancaina.Controllers
                 new SelectListItem { Value = "LISTO PARA SERVIR", Text = "Listo para servir" },
                 new SelectListItem { Value = "ENTREGADO", Text = "Entregado" },
                 new SelectListItem { Value = "CANCELADO", Text = "Cancelado" }
-            };
+            }; 
+            var productos = await _context.Productos.ToListAsync() ?? new List<Productos>();
+            ViewBag.Productos = productos ?? new List<Productos>(); 
 
             if (accion == "Actualizar" && id_orden.HasValue)
             {
@@ -88,10 +94,11 @@ namespace huancaina.Controllers
                     _dbHelper.InsertarDatos(query, parametros);
                     TempData["MensajeOrdenes"] = "Orden creada exitosamente.";
 
+
+                    // FALTA INSERTAR el próximo ID de orden
                     string query1 = "SELECT COALESCE(MAX(id_orden), 0) + 1 AS ProximoId FROM ordenes";
                     int proximoId = Convert.ToInt32(_dbHelper.ObtenerDato(query1));
                     ViewBag.ProximoIdOrden = proximoId;
-
 
                     return RedirectToAction("LeerOrdenes");
                 }

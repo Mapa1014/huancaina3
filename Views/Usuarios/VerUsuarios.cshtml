@@ -11,11 +11,18 @@
 {
     <table class="styled-table">
         <thead>
-            <tr>
-                @foreach (DataColumn column in ViewBag.DataTable.Columns)
-                {
-                    <th>@column.ColumnName</th>
-                }
+            <tr>                				
+                <th>ID</th>
+                <th>Rol</th>
+                <th>Nombre usuario</th>
+                <th>Nombre Completo</th>
+                <th>Email</th>
+                <th>Contrasena</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Telefono emergencia</th>
+                <th>Fecha_registro</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +33,13 @@
                     {
                         <td>@item</td>
                     }
-                </tr>
+                    <td>
+                        <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                        <a href="" class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
+                        <a href="" class="btn btn-danger"
+                           onclick="return confirm('¿Está seguro de que desea eliminar esta orden?');"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>           
             }
         </tbody>
     </table>

@@ -1,0 +1,64 @@
+﻿@using System.Data
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a href="@Url.Action("FormularioProductos", new { accion = "Crear" })" class="btn btn-primary">Agregar producto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+@{
+    ViewData["Title"] = "Ver Productos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>@ViewBag.Mensaje</p>
+
+@if (ViewBag.DataTable != null)
+{
+    <table class="styled-table">
+        <thead>
+            <tr>                	
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Unidad Medida</th>
+                <th>categoria</th>
+                <th>Cantidad</th>
+                <th>Precio Uni</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Descripcion</th>
+                <th>Id Inventario</th>
+                <th>Id Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in ViewBag.DataTable.Rows)
+            {
+                <tr>
+                    @foreach (var item in row.ItemArray)
+                    {
+                        <td>@item</td>
+                    }
+                    <td>
+                        <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                        <a href="" class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
+                        <a href="" class="btn btn-danger"
+                           onclick="return confirm('¿Está seguro de que desea eliminar esta orden?');"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron datos.</p>
+}

@@ -124,26 +124,20 @@ namespace huancaina.Data
                 throw;
             }
         }
+        private readonly string connectionString = "tu_cadena_de_conexión";
+
         public object ObtenerDato(string query, MySqlParameter[] parametros = null)
         {
-            try
+            using (var connection = new MySqlConnection(connectionString))
+            using (var command = new MySqlCommand(query, connection))
             {
-                using (var connection = new MySqlConnection(connectionString));
-                using (var command = new MySqlCommand(query, connection))
+                if (parametros != null)
                 {
-                    if (parametros != null)
-                    {
-                        command.Parameters.AddRange(parametros);
-                    }
-
-                    connection.Open();
-                    return command.ExecuteScalar(); // Devuelve el primer valor de la primera fila
+                    command.Parameters.AddRange(parametros);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                _logger.LogError($"Error al ejecutar la consulta: {ex.Message}");
-                throw;
+
+                connection.Open();
+                return command.ExecuteScalar();
             }
         }
 

@@ -26,8 +26,10 @@ namespace huancaina.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.UserName = User.Identity.Name;
             return View();
         }
+
         public IActionResult getLogin()
         {
             return View("Login");
