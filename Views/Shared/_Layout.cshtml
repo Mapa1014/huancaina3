@@ -23,6 +23,11 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Usuarios/LeerUsuarios"
+                               data-controller="Usuarios" data-action="LeerUsuarios">Usuarios</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Ordenes/LeerOrdenes"
                                data-controller="Ordenes" data-action="LeerOrdenes">Órdenes</a>
@@ -76,10 +81,12 @@
                     <a href="https://www.facebook.com/Huancainacocinaperuana" class="text-light me-3"><i class="fab fa-facebook fa-2x"></i></a>
                     <a href="https://www.instagram.com/huancaina_cocinaperuana/" class="text-light me-3"><i class="fab fa-instagram fa-2x"></i></a>
                     <a href="https://wa.me/573106892785" class="text-light"><i class="fab fa-whatsapp fa-2x"></i></a>
+                    <hr>
+                    <a class="btn btn-footer" asp-area="" asp-controller="Home" asp-action="Contactanos">Contáctanos</a>
                 </div>
                 <!-- Botón de Contactanos debajo de los iconos -->
                 <div class="mt-3">
-                   <a class="btn btn-footer" asp-area="" asp-controller="Home" asp-action="Contactanos">Contáctanos</a>
+                   
                 </div>
 
             </div>

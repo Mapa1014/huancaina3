@@ -5,20 +5,24 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="btn btn-primary" asp-area="" asp-controller="Inventarios" asp-action="CrearInventario">Crear nuevo inventario</a>
+                        <a href="@Url.Action("FormularioInventarios", new { accion = "Crear" })" class="btn btn-primary">Crear nuevo inventario</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Mensaje
+    </div>
+}
+
 @{
     ViewData["Title"] = "Inventarios";
 }
-
-<h2>@ViewData["Title"]</h2>
-
-<p>@ViewBag.Mensaje</p>
 
 @if (ViewBag.DataTable != null)
 {
@@ -42,9 +46,7 @@
                     }
                     <td>
                         <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                        <a href="@Url.Action("CrearInventario", "Inventarios", new { id_inventario = row["id_inventario"] })"
-                           class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
-
+                        <a href="@Url.Action("FormularioInventarios", new { accion = "Actualizar", id_inventario = row["id_inventario"] })" class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
                         <a href="@Url.Action("EliminarInventario", new { id_inventario = row["id_inventario"] })" class="btn btn-danger"
                            onclick="return confirm('¿Está seguro de que desea eliminar este inventario?');"><i class="fa-solid fa-trash"></i></a>
                     </td>

@@ -22,60 +22,53 @@
                 <div class="invalid-feedback">
                     Debe ingresar un ID válido.
                 </div>
-                </div><div class="col-md-5">
-                    <label for="id_orden" class="form-label">Id orden*</label>
-                    <input type="number" id="id_orden" name="id_orden" class="form-control"
-                           value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["id_orden"] : null)"
-                           placeholder="Ingrese el número de Orden" @(ViewBag.Accion == "Actualizar" ? "readonly" : "") required>
-                    <div class="invalid-feedback">
-                        Debe ingresar un número de orden válido.
-                    </div>
+            </div>
+            <div class="col-md-5">
+                <label for="id_orden" class="form-label">Id orden*</label>
+                <input type="number" id="id_orden" name="id_orden" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["id_orden"] : null)"
+                       placeholder="Ingrese el número de Orden" @(ViewBag.Accion == "Actualizar" ? "readonly" : "") required>
+                <div class="invalid-feedback">
+                    Debe ingresar un número de orden válido.
                 </div>
-
-                <div class="col-md-5">
-                    <label for="n_mesa" class="form-label">N° mesa*</label>
-                    <input type="number" id="n_mesa" name="n_mesa" class="form-control"
-                           value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["n_mesa"] : null)"
-                           placeholder="Número de mesa" required>
-                    <div class="invalid-feedback">
-                        Debe ingresar el número de mesa.
-                    </div>
+            </div>
+            <div class="col-md-5">
+                <label for="n_mesa" class="form-label">N° mesa*</label>
+                <input type="number" id="n_mesa" name="n_mesa" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["n_mesa"] : null)"
+                       placeholder="Número de mesa" required>
+                <div class="invalid-feedback">
+                    Debe ingresar el número de mesa.
                 </div>
-
-
-                <div class="col-md-5">
-                    <label for="fecha_orden" class="form-label">Fecha orden*</label>
-                    <input type="datetime-local" id="fecha_orden" name="fecha_orden" class="form-control"
-                           value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_orden"].ToString()).ToString("yyyy-MM-ddTHH:mm") : null)"
-                           required />
-                    <div class="invalid-feedback">
-                        Debe ingresar la fecha de la orden.
-                    </div>
+            </div>
+            <div class="col-md-5">
+                <label for="fecha_orden" class="form-label">Fecha orden*</label>
+                <input type="datetime-local" id="fecha_orden" name="fecha_orden" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_orden"].ToString()).ToString("yyyy-MM-ddTHH:mm") : null)"
+                       required />
+                <div class="invalid-feedback">
+                    Debe ingresar la fecha de la orden.
                 </div>
-
-                <div class="col-md-5">
-                    <label class="form-label" for="estado">Estado</label>
-                    @Html.DropDownList("estado", (IEnumerable<SelectListItem>)ViewBag.Estados, "Seleccione un estado", new { @class = "form-select", @required = "required" })
-                    <div class="invalid-feedback">
-                        Debe seleccionar un estado válido.
-                    </div>
-                </div>                
-
-                <div class="col-md-5">
-                    <label for="observaciones" class="form-label">Observaciones</label>
-                    <input type="text" id="observaciones" name="observaciones" class="form-control"
-                           value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["observaciones"] : null)"
-                           placeholder="Ingrese sus observaciones" required>
-                    <div class="invalid-feedback">
-                        Debe ingresar sus observaciones.
-                    </div>
+            </div>
+            <div class="col-md-5">
+                <label class="form-label" for="estado">Estado</label>
+                @Html.DropDownList("estado", (IEnumerable<SelectListItem>)ViewBag.Estados, "Seleccione un estado", new { @class = "form-select", @required = "required" })
+                <div class="invalid-feedback">
+                    Debe seleccionar un estado válido.
                 </div>
-
-
+            </div> 
+            <div class="col-md-5">
+                <label for="observaciones" class="form-label">Observaciones</label>
+                <input type="text" id="observaciones" name="observaciones" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["observaciones"] : null)"
+                       placeholder="Ingrese sus observaciones" required>
+                <div class="invalid-feedback">
+                    Debe ingresar sus observaciones.
+                </div>
+            </div>
             <div class="text-center">
                 <button class="btn btn-success" type="submit">@ViewBag.Accion Orden</button>
-            </div>
-    
+            </div>    
         </form>
     </div>
 </main>

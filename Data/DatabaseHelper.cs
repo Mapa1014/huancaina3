@@ -7,31 +7,25 @@ namespace huancaina.Data
     public class DatabaseHelper
     {
         private readonly IConfiguration _configuration;
-
         public DatabaseHelper(IConfiguration configuration)
         {
             _configuration = configuration;
-        }
-        
+        }        
         public DataTable VerDatos(string query, MySqlParameter[] parametros = null)
         {
             DataTable dataTable = new DataTable();
-
             try
             {
                 string? connectionString = _configuration.GetConnectionString("MySqlConnection");
-
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        // Agregar parámetros si existen
                         if (parametros != null)
                         {
                             command.Parameters.AddRange(parametros);
                         }
-
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                         {
                             adapter.Fill(dataTable);
@@ -49,10 +43,8 @@ namespace huancaina.Data
                 Console.WriteLine($"Error general: {ex.Message}");
                 throw;
             }
-
             return dataTable;
         }
-
         public void InsertarDatos(string query, MySqlParameter[] parametros)
         {
             try
@@ -80,13 +72,11 @@ namespace huancaina.Data
                 throw;
             }
         }
-
         public void ActualizarDatos(string query, MySqlParameter[] parametros)
         {
             try
             {
                 string? connectionString = _configuration.GetConnectionString("MySqlConnection");
-
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -113,7 +103,6 @@ namespace huancaina.Data
             try
             {
                 string? connectionString = _configuration.GetConnectionString("MySqlConnection");
-
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -132,6 +121,28 @@ namespace huancaina.Data
             catch (Exception ex)
             {
                 Console.WriteLine($"Error general: {ex.Message}");
+                throw;
+            }
+        }
+        public object ObtenerDato(string query, MySqlParameter[] parametros = null)
+        {
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString));
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    if (parametros != null)
+                    {
+                        command.Parameters.AddRange(parametros);
+                    }
+
+                    connection.Open();
+                    return command.ExecuteScalar(); // Devuelve el primer valor de la primera fila
+                }
+            }
+            catch (MySqlException ex)
+            {
+                _logger.LogError($"Error al ejecutar la consulta: {ex.Message}");
                 throw;
             }
         }

@@ -17,7 +17,6 @@ namespace huancaina.Controllers
             _dbHelper = dbHelper;
             _logger = logger;
         }
-
         public IActionResult LeerOrdenes()
         {
             try
@@ -32,15 +31,13 @@ namespace huancaina.Controllers
             {
                 ViewBag.Mensaje = $"Error: {ex.Message}";
             }
-
             return View("VerOrdenes");
         }
         public IActionResult FormularioOrdenes(string accion, int? id_orden = null)
         {
             ViewBag.Accion = accion; // "Crear" o "Actualizar"
             ViewBag.Orden = null;
-
-            // Lista de estados para el formulario
+            
             var estados = new List<SelectListItem>
             {
                 new SelectListItem { Value = "PENDIENTE", Text = "Pendiente" },
@@ -64,59 +61,54 @@ namespace huancaina.Controllers
                     estados.ForEach(e => e.Selected = e.Value == estadoSeleccionado);
                 }
             }
-
-            ViewBag.Estados = estados; // Pasa la lista al ViewBag
+            ViewBag.Estados = estados; 
             return View("FormularioOrdenes");
         }
-
-
 
         [HttpPost]
         public IActionResult GuardarOrden(string accion, int id_orden, int n_mesa, DateTime fecha_orden, string estado, string observaciones, int id_usuario)
         {
             try
             {
+                string query;
+                var parametros = new[]
+                {
+                    new MySqlParameter("@IdOrden", id_orden),
+                    new MySqlParameter("@NMesa", n_mesa),
+                    new MySqlParameter("@FechaOrden", fecha_orden),
+                    new MySqlParameter("@Estado", estado),
+                    new MySqlParameter("@Observaciones", observaciones),
+                    new MySqlParameter("@IdUsuario", id_usuario)
+                };
                 if (accion == "Crear")
                 {
-                    string query = "INSERT INTO ordenes (id_orden, n_mesa, fecha_orden, estado, observaciones, usuarios_id_usuario) " +
+                    query = "INSERT INTO ordenes (id_orden, n_mesa, fecha_orden, estado, observaciones, usuarios_id_usuario) " +
                                    "VALUES (@IdOrden, @NMesa, @FechaOrden, @Estado, @Observaciones, @IdUsuario)";
-                    var parametros = new[]
-                    {
-                        new MySqlParameter("@IdOrden", id_orden),
-                        new MySqlParameter("@NMesa", n_mesa),
-                        new MySqlParameter("@FechaOrden", fecha_orden),
-                        new MySqlParameter("@Estado", estado),
-                        new MySqlParameter("@Observaciones", observaciones),
-                        new MySqlParameter("@IdUsuario", id_usuario)
-                    };
-
+                    
                     _dbHelper.InsertarDatos(query, parametros);
-                    TempData["Mensaje"] = "Orden creada exitosamente.";
+                    TempData["MensajeOrdenes"] = "Orden creada exitosamente.";
+
+                    string query1 = "SELECT COALESCE(MAX(id_orden), 0) + 1 AS ProximoId FROM ordenes";
+                    int proximoId = Convert.ToInt32(_dbHelper.ObtenerDato(query1));
+                    ViewBag.ProximoIdOrden = proximoId;
+
+
+                    return RedirectToAction("LeerOrdenes");
                 }
                 else if (accion == "Actualizar")
                 {
-                    string query = "UPDATE ordenes SET n_mesa = @NMesa, fecha_orden = @FechaOrden, estado = @Estado, " +
+                    query = "UPDATE ordenes SET n_mesa = @NMesa, fecha_orden = @FechaOrden, estado = @Estado, " +
                                    "observaciones = @Observaciones, usuarios_id_usuario = @IdUsuario WHERE id_orden = @IdOrden";
-                    var parametros = new[]
-                    {
-                        new MySqlParameter("@IdOrden", id_orden),
-                        new MySqlParameter("@NMesa", n_mesa),
-                        new MySqlParameter("@FechaOrden", fecha_orden),
-                        new MySqlParameter("@Estado", estado),
-                        new MySqlParameter("@Observaciones", observaciones),
-                        new MySqlParameter("@IdUsuario", id_usuario)
-                    };
-
+                    
                     _dbHelper.ActualizarDatos(query, parametros);
-                    TempData["Mensaje"] = "Orden actualizada exitosamente.";
+                    TempData["MensajeOrdenes"] = "Orden actualizada exitosamente.";
+                    return RedirectToAction("LeerOrdenes");
                 }
             }
             catch (Exception ex)
             {
-                TempData["Mensaje"] = $"Error al guardar la orden: {ex.Message}";
+                TempData["MensajeOrdenes"] = $"Error al guardar la orden: {ex.Message}";
             }
-            _logger.LogInformation($"Acción: {accion}, ID Orden: {id_orden}, Mesa: {n_mesa}, Fecha: {fecha_orden}, Estado: {estado}, Usuario: {id_usuario}");
-
             return RedirectToAction("LeerOrdenes");
         }
         public IActionResult EliminarOrden(int id_orden)
@@ -130,16 +122,13 @@ namespace huancaina.Controllers
                 };
 
                 _dbHelper.EliminarDatos(query, parametros);
-
-                TempData["Mensaje"] = "Orden eliminada exitosamente.";
+                TempData["MensajeOrdenes"] = "Orden eliminada exitosamente.";
             }
             catch (Exception ex)
             {
                 TempData["Mensaje"] = $"Error al eliminar la orden: {ex.Message}";
             }
-
             return RedirectToAction("LeerOrdenes");
         }
-
     }
 }

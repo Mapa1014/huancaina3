@@ -27,9 +27,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Ordenes}/{action=EliminarOrden}/{id_orden?}");
 
 app.MapControllerRoute(
     name: "home",
@@ -38,6 +35,14 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "ordenes",
     pattern: "{controller=Ordenes}/{action=FormularioOrdenes}/{id_orden?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Ordenes}/{action=EliminarOrden}/{id_orden?}");
+
+app.MapControllerRoute(
+    name: "inventarios",
+    pattern: "{controller=Inventarios}/{action=FormularioInventarios}/{id_orden?}");
 
 
 app.Run();

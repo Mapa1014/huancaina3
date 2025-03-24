@@ -16,14 +16,12 @@
 @{
     ViewData["Title"] = "Ordenes";
 }
-
 <h2>@ViewData["Title"]</h2>
-
 <p>@ViewBag.Mensaje</p>
 @if (TempData["Mensaje"] != null)
 {
     <div class="alert alert-info">
-        @TempData["Mensaje"]
+        @TempData["MensajeOrdenes"]
     </div>
 }
 
@@ -62,4 +60,3 @@ else
 {
     <p>No se encontraron datos.</p>
 }
-
