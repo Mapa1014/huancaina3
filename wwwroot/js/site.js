@@ -63,3 +63,30 @@ window.addEventListener('popstate', () => {
     if (path.length < 2) return;
     loadPage(path[0], path[1]);
 });
+
+
+<script>
+        // Validación adicional para los campos de teléfono
+    document.addEventListener('DOMContentLoaded', function() {
+            const telefonos = document.querySelectorAll('input[type="tel"]');
+
+    telefonos.forEach(function(tel) {
+        tel.addEventListener('input', function () {
+            // Eliminar cualquier caracter que no sea número
+            this.value = this.value.replace(/[^0-9]/g, '');
+
+            // Validación visual
+            const formGroup = this.closest('.col-md-12');
+            if (this.value.length === 10 && /^[0-9]{10}$/.test(this.value)) {
+                formGroup.classList.remove('is-invalid');
+                formGroup.classList.add('is-valid');
+            } else {
+                formGroup.classList.remove('is-valid');
+                formGroup.classList.add('is-invalid');
+            }
+        });
+            });
+        });
+</script>
+
+

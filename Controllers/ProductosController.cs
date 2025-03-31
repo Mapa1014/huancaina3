@@ -23,12 +23,14 @@ public class ProductosController : Controller
         return View();
     }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    
     public IActionResult LeerProductos()
     {
+        var usuarioSesion = HttpContext.Session.GetString("Usuario");
+        if (string.IsNullOrEmpty(usuarioSesion))
+        {
+            return RedirectToAction("Login", "Home");
+        }
         try
         {
             string query = "SELECT * FROM productos";

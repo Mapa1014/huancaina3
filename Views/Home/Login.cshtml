@@ -4,6 +4,7 @@
 @{
     <main class="login-body">
         <div class="login-container">
+            
             @if (ViewBag.Mensaje != null)
             {
                 <div class="alert alert-success">@ViewBag.Mensaje</div>
@@ -14,12 +15,14 @@
             }
             <h2>Login</h2>
             <form method="post" asp-controller="Home" asp-action="Login">
-                <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="nombreUsuario">Nombre de Usuario:</label>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" required>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
                 <button type="submit" class="btn btn-warning">Ingresar</button>
             </form>
+            <hr />
+            <a href="" data-controller="" data-action="FormularioUsuarios">¿Olvidó la contraseña y/o usuario?</a>
         </div>
     </main>
 }

@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Registrar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+
+<main>
+    <div class="formulario">
+        <form method="post" asp-controller="Home" asp-action="RegistrarUsuario" novalidate>
+            <div class="texto-formulario">
+                <h2>Registrar nuevo Usuario</h2>
+            </div>
+
+            <div class="input">
+                <div class="col-md-12">
+                    <label for="rolUsuario">Rol Usuario*</label>
+                    <select name="rolUsuario" class="form-select" id="rolUsuario" required>
+                        <option value="">Seleccione</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Cocinero">Cocinero</option>
+                        <option value="Bartender">Bartender</option>
+                        <option value="Mesero">Mesero</option>
+                    </select>
+                    <div class="invalid-feedback">Debe ingresar el rol del usuario.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="nombreUsuario">Nombre usuario*</label>
+                    <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre Usuario" required>
+                    <div class="invalid-feedback">Debe ingresar un nombre de usuario.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="nombresCompletos">Nombres completos*</label>
+                    <input type="text" class="form-control" id="nombresCompletos" name="nombresCompletos" placeholder="Nombres Completos" required>
+                    <div class="invalid-feedback">Debe ingresar nombres y apellidos completos.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="correoElectronico">Correo electrónico*</label>
+                    <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" placeholder="Correo electrónico" required>
+                    <div class="invalid-feedback">Debe ingresar un correo electrónico válido.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="contrasena">Contraseña*</label>
+                    <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                    <div class="invalid-feedback">Digite la contraseña.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="direccion">Dirección*</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" required>
+                    <div class="invalid-feedback">Debe ingresar una dirección.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="telefono">Teléfono*</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono"
+                           placeholder="Ej: 3001234567" pattern="[0-9]{10}" maxlength="10" required>
+                    <div class="invalid-feedback">Debe ingresar un número de 10 dígitos.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="telefonoEmergencia">Teléfono de emergencia*</label>
+                    <input type="tel" class="form-control" id="telefonoEmergencia" name="telefonoEmergencia"
+                           placeholder="Ej: 3001234567" pattern="[0-9]{10}" maxlength="10" required>
+                    <div class="invalid-feedback">Debe ingresar un número de 10 dígitos.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="fechaRegistro">Fecha registro*</label>
+                    <input type="date" class="form-control" id="fechaRegistro" name="fechaRegistro" required>
+                    <div class="invalid-feedback">Debe seleccionar fecha del registro.</div>
+                </div>
+
+                <div class="col-md-12">
+                    <input class="btn btn-primary btn-registrar mt-3" type="submit" value="Registrar">
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

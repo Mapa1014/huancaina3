@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace huancaina.Controllers
 {
@@ -26,34 +27,61 @@ namespace huancaina.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.UserName = User.Identity.Name;
             return View();
         }
 
-        public IActionResult getLogin()
+        public IActionResult Error404()
         {
+            return View();
+        }
+
+        public IActionResult Error500()
+        {
+            return View();
+        }
+
+
+        public async Task<IActionResult> Login(string nombreUsuario, string contrasena)
+        {
+            ViewBag.Error = null;
+            TempData["MensajeUsername"] = "";
+            var query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario AND contrasena = @Contrasena";
+            var parametros = new[]
+            {
+                 new MySqlParameter("@NombreUsuario", nombreUsuario),
+                 new MySqlParameter("@Contrasena", contrasena)
+             };
+
+            var resultado = _dbHelper.VerDatos(query, parametros);
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario && u.Contrasena == contrasena);
+            if (resultado.Rows.Count > 0 || usuario != null)
+            {
+                var nombre = usuario != null ? usuario.NombreUsuario : resultado.Rows[0]["nombre_usuario"].ToString();
+                var rol = usuario != null ? usuario.RolUsuario : resultado.Rows[0]["rol_usuario"].ToString();
+
+                // Guardar en sesión
+                HttpContext.Session.SetString("Usuario", nombre);
+                HttpContext.Session.SetString("RolUsuario", rol);
+                
+                TempData["MensajeUsername"] = $"!     {nombre}    !";
+                ViewBag.Mensaje = TempData.Peek("MensajeUsername"); 
+                return RedirectToAction("Index", "Home"); 
+            }
+            else
+            {
+                ViewBag.Error = "Usuario o contraseña incorrectos.";
+            }
+                
             return View("Login");
         }
 
-        public async Task<IActionResult> Login(string username, string password)
+        public IActionResult CerrarSesion()
         {
-            Console.WriteLine($"Usuarios: {username}, Contraseña: {password}");
-            // Simulación de autenticación
-
-            var u = await _context.Usuarios.FirstOrDefaultAsync(u => u.NombreUsuario == username && u.Contrasena == password);
-
-
-            if (u != null)
-            {
-                TempData["Mensaje"] = $"Ingresó exitosamente. {username}";
-                Console.WriteLine($"Ingresó exitosamente. {username}");
-                return RedirectToAction("Index", "Home"); // Redirige si el login es exitoso
-            }
-
-            ViewBag.Error = "Usuario o contraseña incorrectos";
-            return View();
+            HttpContext.Session.Clear(); 
+            TempData["MensajeUsername"] = "";
+            ViewBag.Mensaje = TempData.Peek("MensajeUsername");
+            return RedirectToAction("Login", "Home");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -61,19 +89,22 @@ namespace huancaina.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Contactanos()
+        public IActionResult RegistrarUsuario()
         {
             return View();
         }
 
-        // Acción para procesar el envío del formulario
+        public IActionResult Contactanos()
+        {
+            return View();
+        }
+                
         [HttpPost]
         public IActionResult EnviarMensaje(string nombre, string telefono, string email, string mensaje)
-        {
-            // Enviar un mensaje de confirmación a la vista
+        {            
             ViewBag.MensajeExito = "Tu mensaje ha sido enviado correctamente. Nos pondremos en contacto contigo pronto.";
             Console.WriteLine($"Nombre: {nombre}, Teléfono: {telefono}, Email: {email}, Mensaje: {mensaje}");
-            return View("Contactanos"); // Vuelve a la misma vista de Contactanos con el mensaje
+            return View("Contactanos"); 
         }
     }
 }

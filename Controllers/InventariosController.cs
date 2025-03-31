@@ -24,9 +24,14 @@ namespace huancaina.Controllers
 
         public IActionResult LeerInventario()
         {
+            var usuarioSesion = HttpContext.Session.GetString("Usuario");
+            if (string.IsNullOrEmpty(usuarioSesion))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             try
             {
-                string query = "SELECT * FROM inventarios";                 
+                string query = "SELECT * FROM inventarios";
                 DataTable resultados = _dbHelper.VerDatos(query);
 
                 ViewBag.DataTable = resultados;
@@ -43,7 +48,7 @@ namespace huancaina.Controllers
         {
             ViewBag.Accion = accion; // "Crear" o "Actualizar"
             ViewBag.Inventario = null;
-                       
+
             var categorias = new List<SelectListItem>
             {
                 new SelectListItem { Value = "Carnes", Text = "Carnes" },
@@ -62,14 +67,14 @@ namespace huancaina.Controllers
 
                 if (resultado.Rows.Count > 0)
                 {
-                    ViewBag.Inventario = resultado.Rows[0]; 
-                                        
+                    ViewBag.Inventario = resultado.Rows[0];
+
                     var categoriaSeleccionada = resultado.Rows[0]["categoria"].ToString();
                     categorias.ForEach(c => c.Selected = c.Value == categoriaSeleccionada);
                 }
             }
 
-            ViewBag.Categorias = categorias; 
+            ViewBag.Categorias = categorias;
             return View("FormularioInventarios");
         }
 
@@ -84,16 +89,16 @@ namespace huancaina.Controllers
                     new MySqlParameter("@IdInventario", id_inventario),
                     new MySqlParameter("@Categoria", categoria),
                     new MySqlParameter("@CantidadDisponible", cantidad_disponible),
-                    new MySqlParameter("@FechaCreacion", fecha_creacion), 
+                    new MySqlParameter("@FechaCreacion", fecha_creacion),
                     new MySqlParameter("@FechaMovimiento", fecha_movimiento),
                     new MySqlParameter("@IdUsuario", id_usuario)
                 };
 
-                if (accion == "Crear") 
+                if (accion == "Crear")
                 {
                     query = "INSERT INTO inventarios (id_inventario, categoria, cantidad_disponible, fecha_creacion, fecha_movimiento, usuarios_id_usuario) " +
                             "VALUES (@IdInventario, @Categoria, @CantidadDisponible, @FechaCreacion, @FechaMovimiento, @IdUsuario)";
-                    
+
                     _dbHelper.InsertarDatos(query, parametros);
                     TempData["MensajeInventarios"] = "Inventario creado exitosamente.";
 
@@ -103,7 +108,7 @@ namespace huancaina.Controllers
                     query = "UPDATE inventarios SET categoria = @Categoria, cantidad_disponible = @CantidadDisponible, fecha_movimiento = @FechaMovimiento, usuarios_id_usuario = @IdUsuario " +
                             "WHERE id_inventario = @IdInventario";
 
-                    _dbHelper.ActualizarDatos(query, parametros);                    
+                    _dbHelper.ActualizarDatos(query, parametros);
                     TempData["MensajeInventarios"] = "Inventario actualizado exitosamente.";
                     return RedirectToAction("LeerInventario");
 
@@ -142,4 +147,3 @@ namespace huancaina.Controllers
         }
     }
 }
-

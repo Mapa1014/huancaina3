@@ -41,16 +41,27 @@
 
                 <div class="col-md-5">
                     <label for="fecha_creacion" class="form-label">Fecha de creación*</label>
-                    <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control"
-                           value="@(ViewBag.Inventario != null ? DateTime.Parse(ViewBag.Inventario?["fecha_creacion"].ToString()).ToString("yyyy-MM-dd") : null)" required>
-                    <div class="invalid-feedback">Debe ingresar la fecha de creación.</div>
+                    <input type="datetime-local" id="fecha_creacion" name="fecha_creacion" class="form-control"
+                           value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_creacion"].ToString()).ToString("yyyy-MM-ddTHH:mm") : DateTime.Now.ToString("yyyy-MM-ddTHH:mm"))"
+                           readonly required />
+                    <div class="invalid-feedback">
+                        Fecha de creación generada automáticamente.
+                    </div>
                 </div>
+                
 
                 <div class="col-md-5">
                     <label for="fecha_movimiento" class="form-label">Fecha de movimiento*</label>
-                    <input type="date" id="fecha_movimiento" name="fecha_movimiento" class="form-control"
-                           value="@(ViewBag.Inventario != null ? DateTime.Parse(ViewBag.Inventario?["fecha_movimiento"].ToString()).ToString("yyyy-MM-dd") : null)" required>
-                    <div class="invalid-feedback">Debe ingresar la fecha de movimiento.</div>
+                    <input type="date"
+                           id="fecha_movimiento"
+                           name="fecha_movimiento"
+                           class="form-control"
+                           value="@(ViewBag.Inventario != null ? DateTime.Parse(ViewBag.Inventario?["fecha_movimiento"].ToString()).ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"))"
+                           min="@DateTime.Now.ToString("yyyy-MM-dd")"
+                           required />
+                    <div class="invalid-feedback">
+                        Solo se permiten fechas futuras.
+                    </div>
                 </div>
 
                 <div class="col-md-5">

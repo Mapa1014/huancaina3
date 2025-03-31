@@ -45,9 +45,9 @@
                         <td>@item</td>
                     }
                     <td>
-                        <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                        <a href="@Url.Action("FormularioInventarios", new { accion = "Actualizar", id_inventario = row["id_inventario"] })" class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
-                        <a href="@Url.Action("EliminarInventario", new { id_inventario = row["id_inventario"] })" class="btn btn-danger"
+                        <a href="" class="btn btn-success" title="Ver Inventario"><i class="fa-solid fa-eye"></i></a>
+                        <a href="@Url.Action("FormularioInventarios", new { accion = "Actualizar", id_inventario = row["id_inventario"] })" class="btn btn-primary" title="Actualizar Inventario"><i class="fa-solid fa-user-pen"></i></a>
+                        <a href="@Url.Action("EliminarInventario", new { id_inventario = row["id_inventario"] })" class="btn btn-danger" title="Eliminar Inventario"
                            onclick="return confirm('¿Está seguro de que desea eliminar este inventario?');"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>

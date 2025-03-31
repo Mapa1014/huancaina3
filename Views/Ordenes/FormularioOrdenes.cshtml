@@ -34,24 +34,28 @@
                     Debe ingresar un número de orden válido.
                 </div>
             </div>
-            <div class="col-md-5">
-                <label for="n_mesa" class="form-label">N° mesa*</label>
-                <input type="number" id="n_mesa" name="n_mesa" class="form-control"
-                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["n_mesa"] : null)"
-                       placeholder="Número de mesa" required>
-                <div class="invalid-feedback">
-                    Debe ingresar el número de mesa.
+                <div class="col-md-5">
+                    <label class="form-label" for="n_mesa">N° mesa*</label>
+                    @Html.DropDownList("n_mesa", (IEnumerable<SelectListItem>)ViewBag.Mesas,
+                         "Seleccione un número",
+                         new { @class = "form-select", @required = "required" })
+                    @(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["n_mesa"] : "")
+                    <div class="invalid-feedback">
+                        Debe seleccionar un número de mesa válido.
+                    </div>
                 </div>
-            </div>
+
+
             <div class="col-md-5">
                 <label for="fecha_orden" class="form-label">Fecha orden*</label>
                 <input type="datetime-local" id="fecha_orden" name="fecha_orden" class="form-control"
-                       value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_orden"].ToString()).ToString("yyyy-MM-ddTHH:mm") : null)"
-                       required />
+                       value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_orden"].ToString()).ToString("yyyy-MM-ddTHH:mm") : DateTime.Now.ToString("yyyy-MM-ddTHH:mm"))"
+                       readonly required />
                 <div class="invalid-feedback">
-                    Debe ingresar la fecha de la orden.
+                    Fecha de la orden generada automáticamente.
                 </div>
             </div>
+
             <div class="col-md-5">
                 <label class="form-label" for="estado">Estado</label>
                 @Html.DropDownList("estado", (IEnumerable<SelectListItem>)ViewBag.Estados, "Seleccione un estado", new { @class = "form-select", @required = "required" })
@@ -66,15 +70,16 @@
                         <option value="@producto.NombreProducto">@producto.NombreProducto</option>
                     }
                 </select>
-            <div class="col-md-5">
-                <label for="observaciones" class="form-label">Observaciones</label>
-                <textarea type="text" id="observaciones" name="observaciones" class="form-control"
-                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["observaciones"] : null)"
-                       placeholder="Ingrese sus observaciones" required></textarea>
-                <div class="invalid-feedback">
-                    Debe ingresar sus observaciones.
+                <div class="col-md-5">
+                    <label for="observaciones" class="form-label">Platos de la orden*</label>
+                    <textarea id="observaciones" name="observaciones" class="form-control"
+                              placeholder="Ingrese sus observaciones" required>
+                        @(ViewBag.Accion == "Actualizar" ? ViewBag.Orden?["observaciones"] : "")
+                    </textarea>
+                    <div class="invalid-feedback">
+                        Debe ingresar sus observaciones.
+                    </div>
                 </div>
-            </div>
             <div class="text-center">
                 <button class="btn btn-success" type="submit">@ViewBag.Accion Orden</button>
             </div>    

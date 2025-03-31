@@ -45,7 +45,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.20rem #258cfb;
 }
 
 
@@ -110,7 +110,7 @@ body {
 }
 
 .navbar {
-    background-color: #283618 !important; /* Fondo negro */
+    background-color: black !important;
     display: flex;
     justify-content: center; /* Centra los elementos horizontalmente */
     align-items: center;
@@ -133,7 +133,7 @@ body {
     .navbar a,
     .navbar .nav-link {
         color: white !important; /* Letras blancas */
-        font-size: 1.4em; /* Aumenta el tamaño de la fuente */
+        font-size: 1rem; /* Aumenta el tamaño de la fuente */
         text-decoration: none;
         font-weight: bold;
     }
@@ -142,6 +142,14 @@ body {
         .navbar .nav-link:hover {
             color: #f8c200 !important; 
         }
+
+.navbar .btn {
+        font-size: 0.9rem; /* Reducir el tamaño del texto */
+        padding: 6px 12px; /* Ajustar padding para que no sean tan grandes */
+        border-radius: 4px; /* Bordes más pequeños */
+}
+
+
 .footer {
     background-color: #283618 !important;
     color: white;
@@ -167,9 +175,14 @@ body {
 
 
 .carousel-inner img {
-    height: 500px;
-    object-fit: cover;
+    width: 100%; /* Se ajusta al ancho del contenedor */
+    height: auto; /* Mantiene la proporción original */
+    max-height: 600px; /* Limita la altura para que no se vea demasiado grande */
+    object-fit: contain; /* Asegura que la imagen se vea completa sin cortes */
+    display: block;
+    margin: auto;
 }
+
 
 
 /* Estilos para el cuerpo del login */
@@ -288,3 +301,35 @@ body {
     background-color: #f4c08d; /* Un tono intermedio de naranja */
     transition: 0.3s;
 }
+.formulario {
+    max-width: 450px; /* Define un ancho máximo */
+    margin: 0 auto; /* Centra el formulario */
+    padding: 20px;
+    background: #f8f9fa; /* Color de fondo suave */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.input .col-md-12 {
+    margin-bottom: 15px; /* Espacio entre los inputs */
+}
+
+.input input,
+.input select {
+    font-size: 14px; /* Reduce el tamaño de la fuente */
+    padding: 8px; /* Reduce el padding */
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+.btn-registrar {
+    width: 120px; /* Reduce el ancho del botón */
+    height: 35px; /* Reduce la altura del botón */
+    padding: 9px 16px; /* Ajusta el tamaño del botón */
+    font-size: 10px; /* Reduce el tamaño del texto */
+    border-radius: 5px; /* Esquinas más suaves */
+}
+

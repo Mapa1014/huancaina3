@@ -6,7 +6,7 @@ namespace huancaina.Data
 {
     public class DatabaseHelper
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration; //* Se inyecta la configuración de la aplicación
         public DatabaseHelper(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -140,6 +140,31 @@ namespace huancaina.Data
                 return command.ExecuteScalar();
             }
         }
+        public int[] ObtenerNMesa()
+        {
+            // Array para almacenar los resultados
+            List<int> mesas = new List<int>();
 
+            string? connectionString = _configuration.GetConnectionString("MySqlConnection");
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                // Crear el comando SQL
+                using (var comando = new MySqlCommand("SELECT n_mesa FROM ordenes;", connection))
+                {
+                    // Ejecutar el query
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {                            
+                            mesas.Add(reader.GetInt32(0)); 
+                        }
+                    }
+                }
+            }           
+            return mesas.ToArray();
+        }
     }
 }

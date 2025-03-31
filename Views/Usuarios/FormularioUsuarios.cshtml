@@ -1,0 +1,114 @@
+﻿@*
+    Layout = "~/Views/Shared/_Layout.cshtml";
+*@
+@using huancaina.Models
+@{ 
+<main>
+    <div class="container mt-5">
+        <form class="row g-3 needs-validation" style="justify-content: center;" method="post" asp-action="GuardarUsuario">
+            <input type="hidden" name="accion" value="@ViewBag.Accion" />
+            @if (ViewBag.Accion == "Actualizar")
+            {
+                <input type="hidden" name="id_usuario" value="@ViewBag.Usuario?["id_usuario"]" />
+            }
+            <div class="text-center mb-4">
+                <h2 class="h2-fac">@ViewBag.Accion Usuario</h2>
+                <hr>
+            </div>
+            <div class="col-md-5">
+                <label for="id_usuario" class="form-label">ID Usuario*</label>
+                    <input type="number" id="id_usuario" name="id_usuario" class="form-control"
+                           value="@(ViewBag.Accion == "Actualizar" && ViewBag.Usuario != null ? ViewBag.Usuario?["id_usuario"] : null)"
+                           placeholder="Ingrese el ID del usuario" @(ViewBag.Accion == "Actualizar" ? "readonly" : "") required />
+                <div class="invalid-feedback">
+                    Debe ingresar un ID válido.
+                </div>
+            </div>
+                <div class="col-md-5">
+                    <label for="nombre_completo" class="form-label">Nombre Completo*</label>
+                    <input type="text" id="nombre_completo" name="nombre_completo" class="form-control"
+                           value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["nombre_completo"] : null)"
+                           placeholder="Ingrese el nombre de usuario completo" required />
+                    <div class="invalid-feedback">
+                        Debe ingresar un nombre de usuario completo válido.
+                    </div>
+                </div>
+            <div class="col-md-5">
+                <label for="nombre_usuario" class="form-label">Nombre Usuario*</label>
+                <input type="text" id="nombre_usuario" name="nombre_usuario" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["nombre_usuario"] : null)"
+                       placeholder="Ingrese el nombre de usuario" required />
+                <div class="invalid-feedback">
+                    Debe ingresar un nombre de usuario válido.
+                </div>
+            </div>
+                <div class="col-md-5">
+                    <label for="contrasena" class="form-label">Contraseña*</label>
+                    <input type="password" id="contrasena" name="contrasena" class="form-control"
+                           value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["contrasena"] : null)"
+                           placeholder="Ingresa una contraseña valida" required />
+                    <div class="invalid-feedback">
+                        Debe ingresar una contraseña válida.
+                    </div>
+                </div>
+            <div class="col-md-5">
+                <label for="email" class="form-label">Email*</label>
+                <input type="email" id="email" name="email" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["email"] : null)"
+                       placeholder="Ingrese el correo electrónico" required />
+                <div class="invalid-feedback">
+                    Debe ingresar un email válido.
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="direccion" class="form-label">Dirección*</label>
+                <input type="text" id="direccion" name="direccion" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["direccion"] : null)"
+                       placeholder="Ingrese la dirección" required />
+                <div class="invalid-feedback">
+                    Debe ingresar una dirección válida.
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="telefono" class="form-label">Teléfono*</label>
+                <input type="text" id="telefono" name="telefono" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["telefono"] : null)"
+                       placeholder="Ingrese el teléfono" required />
+                <div class="invalid-feedback">
+                    Debe ingresar un teléfono válido.
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="rol_usuario" class="form-label">Rol Usuario*</label>
+                <input type="text" id="rol_usuario" name="rol_usuario" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["rol_usuario"] : null)"
+                       placeholder="Ingrese el rol del usuario" required />
+                <div class="invalid-feedback">
+                    Debe ingresar un rol válido.
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="telefono_emergencia" class="form-label">Teléfono de Emergencia*</label>
+                <input type="text" id="telefono_emergencia" name="telefono_emergencia" class="form-control"
+                       value="@(ViewBag.Accion == "Actualizar" ? ViewBag.Usuario?["telefono_emergencia"] : null)"
+                       placeholder="Ingrese el teléfono de emergencia" required />
+                <div class="invalid-feedback">
+                    Debe ingresar un teléfono de emergencia válido.
+                </div>
+            </div>
+                <div class="col-md-5">
+                    <label for="fecha_registro" class="form-label">Fecha registro*</label>
+                    <input type="datetime-local" id="fecha_registro" name="fecha_registro" class="form-control"
+                           value="@(ViewBag.Accion == "Actualizar" ? DateTime.Parse(ViewBag.Orden?["fecha_registro"].ToString()).ToString("yyyy-MM-ddTHH:mm") : DateTime.Now.ToString("yyyy-MM-ddTHH:mm"))"
+                           readonly required />
+                    <div class="invalid-feedback">
+                        Fecha de creación de usuario automáticamente.
+                    </div>
+                </div>
+            <div class="text-center">
+                <button class="btn btn-success" type="submit">@ViewBag.Accion Usuario</button>
+            </div>
+        </form>
+    </div>
+</main>
+}

@@ -1,4 +1,21 @@
 ﻿@using System.Data
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a href="@Url.Action("FormularioUsuarios", new { accion = "Crear" })" class="btn btn-primary">Crear nuevo usuario</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+@{
+    var usuarioSesion = Context.Session.GetString("Usuario");
+}
+
 @{
     ViewData["Title"] = "Ver Usuarios";
 }
@@ -34,10 +51,14 @@
                         <td>@item</td>
                     }
                     <td>
-                        <a href="" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                        <a href="" class="btn btn-primary"><i class="fa-solid fa-user-pen"></i></a>
-                        <a href="" class="btn btn-danger"
-                           onclick="return confirm('¿Está seguro de que desea eliminar esta orden?');"><i class="fa-solid fa-trash"></i></a>
+                        <a href="" class="btn btn-success" title="Ver Usuario"><i class="fa-solid fa-eye"></i></a>
+                        <a href="@Url.Action("FormularioUsuarios", new { accion = "Actualizar", id_usuario = row["id_usuario"] })" class="btn btn-primary" title="Actualizar Usuario">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </a>
+                        <a href="@Url.Action("EliminarUsuario", new { id_usuario = row["id_usuario"] })" class="btn btn-danger" title="Eliminar Usuario"
+                           onclick="return confirm('¿Está seguro de que desea eliminar este usuario?');">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
                     </td>
                 </tr>           
             }
